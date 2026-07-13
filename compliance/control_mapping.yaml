@@ -1,3 +1,4 @@
+#IAM Password Policy
 IAM-001:
   framework_mappings:
     nist_800_53:
@@ -6,7 +7,7 @@ IAM-001:
       - "1.8"
   category: "Identity and Access Management"
   control_objective: "Ensure IAM password policies are configured to enforce strong authentication practices."
-
+#Cloudtrail Enabled
 LOG-001:
   framework_mappings:
     nist_800_53:
@@ -16,3 +17,14 @@ LOG-001:
       - "3.1"
   category: "Logging and Monitoring"
   control_objective: "Ensure CloudTrail is enabled to record AWS account activity for audit and investigation."
+#S3 public access
+S3-001:
+  framework_mappings:
+    nist_800_53:
+      - AC-3
+      - AC-6
+      - SC-7
+    cis_aws_foundations:
+      - "2.1.4"
+  category: "Data Protection"
+  control_objective: "Ensure S3 buckets block public access to reduce the risk of unauthorized data exposure."
