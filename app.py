@@ -1,7 +1,8 @@
 from scanner.iam_checks import check_password_policy
 from scanner.cloudtrail_checks import check_cloudtrail_enabled
 from scanner.s3_checks import check_s3_public_access_block
-
+from scanner.ec2_checks import check_security_groups_open_to_risky_ports
+from scanner.iam_checks import check_old_access_keys
 
 def print_result(result):
     print("--------------------------------------")
@@ -20,7 +21,9 @@ def main():
     checks = [
         check_password_policy,
         check_cloudtrail_enabled,
-        check_s3_public_access_block
+        check_s3_public_access_block,
+        check_security_groups_open_to_risky_ports,
+        check_old_access_keys
     ]
 
     print(f"Total checks loaded: {len(checks)}")
