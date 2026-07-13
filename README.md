@@ -1,4 +1,6 @@
 # Cloud Compliance Automation Platform
+<img width="1169" height="619" alt="Screenshot 2026-07-13 at 8 37 02 AM" src="https://github.com/user-attachments/assets/1c135add-f86c-40d7-b378-1934e6331f22" />
+
 
 ## Overview
 
