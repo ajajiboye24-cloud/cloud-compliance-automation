@@ -1,0 +1,8 @@
+IAM-001:
+  framework_mappings:
+    nist_800_53:
+      - IA-5
+    cis_aws_foundations:
+      - "1.8"
+  category: "Identity and Access Management"
+  control_objective: "Ensure IAM password policies are configured to enforce strong authentication practices."
