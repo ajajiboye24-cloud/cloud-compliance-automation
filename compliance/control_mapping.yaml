@@ -1,24 +1,25 @@
-#IAM Password Policy
 IAM-001:
+  category: "Identity and Access Management"
+  control_objective: "Ensure IAM password policies are configured to enforce strong authentication practices."
   framework_mappings:
     nist_800_53:
       - IA-5
     cis_aws_foundations:
       - "1.8"
-  category: "Identity and Access Management"
-  control_objective: "Ensure IAM password policies are configured to enforce strong authentication practices."
-#Cloudtrail Enabled
+
 LOG-001:
+  category: "Logging and Monitoring"
+  control_objective: "Ensure CloudTrail is enabled to record AWS account activity for audit and investigation."
   framework_mappings:
     nist_800_53:
       - AU-2
       - AU-12
     cis_aws_foundations:
       - "3.1"
-  category: "Logging and Monitoring"
-  control_objective: "Ensure CloudTrail is enabled to record AWS account activity for audit and investigation."
-#S3 public access
+
 S3-001:
+  category: "Data Protection"
+  control_objective: "Ensure S3 buckets block public access to reduce the risk of unauthorized data exposure."
   framework_mappings:
     nist_800_53:
       - AC-3
@@ -26,10 +27,10 @@ S3-001:
       - SC-7
     cis_aws_foundations:
       - "2.1.4"
-  category: "Data Protection"
-  control_objective: "Ensure S3 buckets block public access to reduce the risk of unauthorized data exposure."
-#EC2 Security Groups
+
 EC2-001:
+  category: "Network Security"
+  control_objective: "Ensure security groups do not expose high-risk administrative or database ports to the public internet."
   framework_mappings:
     nist_800_53:
       - AC-4
@@ -38,15 +39,13 @@ EC2-001:
       - "5.2"
       - "5.3"
       - "5.4"
-  category: "Network Security"
-  control_objective: "Ensure security groups do not expose high-risk administrative or database ports to the public internet."
-#IAM old access keys
+
 IAM-002:
+  category: "Identity and Access Management"
+  control_objective: "Ensure IAM access keys are rotated regularly to reduce credential compromise risk."
   framework_mappings:
     nist_800_53:
       - IA-5
       - AC-2
     cis_aws_foundations:
       - "1.14"
-  category: "Identity and Access Management"
-  control_objective: "Ensure IAM access keys are rotated regularly to reduce credential compromise risk."
