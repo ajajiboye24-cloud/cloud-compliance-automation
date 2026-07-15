@@ -10,6 +10,15 @@ The goal of this project is to automate cloud security assessments and demonstra
 
 ---
 
+## How It Works
+
+1. The user runs `python app.py`.
+2. The scanner connects to AWS using `boto3`.
+3. Each AWS service check returns a standardized finding.
+4. The compliance engine enriches the finding with NIST and CIS mappings.
+5. The application prints detailed results and a compliance summary.
+
+
 ## Problem Statement
 
 Cloud environments contain hundreds of security settings that organizations must continuously monitor to remain secure and compliant. Manually reviewing AWS configurations is time-consuming, error-prone, and difficult to scale.
@@ -30,15 +39,29 @@ This project solves that problem by automatically:
 
 ## Features
 
-### Current Features (Version 1)
+## Roadmap
 
-* Scan AWS account configurations
-* Check IAM security settings
-* Check S3 security settings
-* Check CloudTrail configuration
-* Evaluate selected security controls
-* Display Pass/Fail results
-* Store scan findings
+- [x] Build AWS scanner
+- [x] Add five compliance controls
+- [x] Add compliance framework mappings
+- [x] Add scan summary
+- [ ] Store findings in SQLite
+- [ ] Build Streamlit dashboard
+- [ ] Generate PDF audit reports
+- [ ] Add multi-account support
+
+## Current Controls
+
+| Control ID | Service | Description | Severity |
+|---|---|---|---|
+| IAM-001 | IAM | Checks whether an IAM password policy exists | Medium |
+| LOG-001 | CloudTrail | Checks whether CloudTrail is enabled | High |
+| S3-001 | S3 | Checks whether S3 buckets block public access | High |
+| EC2-001 | EC2 | Checks whether risky ports are open to the internet | Critical |
+| IAM-002 | IAM | Checks whether IAM access keys are older than 90 days | High |
+
+
+
 
 ### Planned Features
 
