@@ -6,6 +6,11 @@ from scanner.ec2_checks import check_security_groups_open_to_risky_ports
 from compliance.mapper import load_control_mappings, enrich_finding
 from utils.logger import setup_logger
 
+from datetime import datetime, timezone
+from uuid import uuid4
+
+from database.database import initialize_database, save_scan_results
+
 
 def print_result(result):
     print("--------------------------------------")
@@ -43,11 +48,14 @@ def print_summary(results):
     print(f"Compliance Score: {compliance_score}%")
     print("======================================")
 
+    return compliance_score
+
 
 def main():
     logger = setup_logger()
     logger.info("Starting cloud compliance scan")
 
+    initialize_database()
     mappings = load_control_mappings()
 
     checks = [
@@ -69,8 +77,19 @@ def main():
         results.append(enriched_result)
         print_result(enriched_result)
 
-    print_summary(results)
+    compliance_score = print_summary(results)
 
+    scan_id = str(uuid4())
+    timestamp = datetime.now(timezone.utc).isoformat()
+
+    save_scan_results(
+        scan_id,
+        timestamp,
+        compliance_score,
+        results
+    )
+
+    logger.info(f"Saved Scan {scan_id}")
     logger.info("Cloud compliance scan completed")
 
 
