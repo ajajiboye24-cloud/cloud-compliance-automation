@@ -4,10 +4,7 @@ from contextlib import closing
 
 
 DATABASE_NAME = "scanner_results.db"
-def save_finding(scan_id, finding):
-    pass
-def save_scan(scan_id, timestamp, overall_score):
-    pass
+
 
 def initialize_database():
     create_scans_table_sql = """
@@ -29,7 +26,8 @@ def initialize_database():
         severity TEXT NOT NULL,
         category TEXT,
         control_objective TEXT,
-        framework_mappings TEXT,
+        nist_800_53 TEXT,
+        cis_aws_foundations TEXT,
         evidence TEXT,
         remediation TEXT
     );
@@ -41,24 +39,10 @@ def initialize_database():
             cursor.execute(create_scans_table_sql)
             cursor.execute(create_findings_table_sql)
             conn.commit()
-    except Error as e:
-        print(f"Error occurred while initializing database: {e}")
 
+    except Error as error:
+        print(f"Error initializing database: {error}")
 
-def save_scan(scan_id, timestamp, overall_score):
-    pass
-
-
-def save_finding(scan_id, finding):
-    pass
-
-
-def save_scan_results(scan_id, timestamp, overall_score, findings):
-    pass
-
-
-def get_previous_scan_results():
-    pass
 
 def save_scan(scan_id, timestamp, overall_score):
     insert_scan_sql = """
@@ -81,3 +65,71 @@ def save_scan(scan_id, timestamp, overall_score):
 
     except Error as error:
         print(f"Error saving scan: {error}")
+
+
+def save_finding(scan_id, finding):
+    insert_finding_sql = """
+    INSERT INTO findings (
+        scan_id,
+        control_id,
+        title,
+        service,
+        status,
+        severity,
+        category,
+        control_objective,
+        nist_800_53,
+        cis_aws_foundations,
+        evidence,
+        remediation
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    """
+
+    frameworks = finding.get("framework_mappings", {})
+
+    nist_controls = ", ".join(
+        frameworks.get("nist_800_53", [])
+    )
+
+    cis_controls = ", ".join(
+        frameworks.get("cis_aws_foundations", [])
+    )
+
+    values = (
+        scan_id,
+        finding.get("control_id"),
+        finding.get("title"),
+        finding.get("service"),
+        finding.get("status"),
+        finding.get("severity"),
+        finding.get("category"),
+        finding.get("control_objective"),
+        nist_controls,
+        cis_controls,
+        finding.get("evidence"),
+        finding.get("remediation")
+    )
+
+    try:
+        with sqlite3.connect(DATABASE_NAME) as conn:
+            cursor = conn.cursor()
+            cursor.execute(insert_finding_sql, values)
+            conn.commit()
+
+    except Error as error:
+        print(f"Error saving finding: {error}")
+
+
+def save_scan_results(scan_id, timestamp, overall_score, findings):
+    print(f"Saving scan {scan_id} with {len(findings)} findings")
+    save_scan(scan_id, timestamp, overall_score)
+
+    for finding in findings:
+        save_finding(scan_id, finding)
+    
+    print("Database Save Completed")
+
+
+def get_previous_scan_results():
+    pass
