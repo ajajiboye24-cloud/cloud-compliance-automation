@@ -45,8 +45,8 @@ This project solves that problem by automatically:
 - [x] Add five compliance controls
 - [x] Add compliance framework mappings
 - [x] Add scan summary
-- [ ] Store findings in SQLite
-- [ ] Build Streamlit dashboard
+- [x] Store findings in SQLite
+- [x] Build Streamlit dashboard
 - [ ] Generate PDF audit reports
 - [ ] Add multi-account support
 
@@ -65,7 +65,6 @@ This project solves that problem by automatically:
 
 ### Planned Features
 
-* Compliance dashboard (Streamlit)
 * Executive compliance reports (PDF)
 * Risk scoring
 * Historical scan tracking
@@ -116,7 +115,6 @@ This project is intended to strengthen practical skills in:
 
 * Expand security control library
 * Add identity governance features
-* Build a web dashboard
 * Automate compliance reporting
 * Support multiple AWS accounts
 * Implement role-based access control (RBAC)
