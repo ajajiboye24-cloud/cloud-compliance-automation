@@ -49,6 +49,7 @@ This project solves that problem by automatically:
 - [x] Build Streamlit dashboard
 - [ ] Generate PDF audit reports
 - [ ] Add multi-account support
+- [ ] IaC/Terraform 
 
 ## Current Controls
 
